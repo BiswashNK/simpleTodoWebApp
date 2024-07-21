@@ -1,0 +1,31 @@
+<div class="todo-container">
+  <div class="profile">
+    <button class="logout-button" (click)="logout()">Logout</button>
+    <h3>Hey, {{ username }}!</h3>
+  </div>
+
+  <h2 class="title">Todo App</h2>
+
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="task"
+      placeholder="Enter a new task"
+      (keyup.enter)="add_task()"
+    />
+    <button class="add-button" (click)="add_task()">Add Task</button>
+  </div>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+  <div class="task-list">
+    <p
+      *ngFor="let item of tasks"
+      class="task-item"
+      [class.completed]="item.completed"
+    >
+      <span (click)="toggle_task(item.id)">&diam; {{ item.task }}</span>
+      <button class="delete-button" (click)="delete_task(item.id)">
+        Delete
+      </button>
+    </p>
+  </div>
+</div>

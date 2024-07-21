@@ -1,3 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using ToDoAppSpace.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 if (string.IsNullOrEmpty(dbPassword))
@@ -10,6 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("MyConnection")
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddCors(options =>
 {
@@ -32,6 +40,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseCors();
+
 
 app.UseEndpoints(endpoints =>
 {
